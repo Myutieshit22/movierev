@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'montserrat';
+    src: url('../fonts/Montserrat-Bold.otf');
+}
+
+
+.montserrat {
+    font-family: 'montserrat', sans-serif;
+}
+
+.secontainer {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/** star hover **/
+.rate {
+    float: left;
+    height: 40px;
+}
+
+.rate:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
+}
+
+.rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+    content: '★ ';
+}
+
+.rate>input:checked~label {
+    color: #ffc700;
+}
