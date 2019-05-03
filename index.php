@@ -17,7 +17,7 @@
                 <?php 
                     $sel = mysqli_query($conn, "SELECT * FROM genre ORDER BY genre");
                     while($row = mysqli_fetch_assoc($sel)){?>
-                    <a class="text-primary" href="<?php echo 'search.php?genre='.$row['genre_id'] ?>"><?php echo $row['genre']?></a>
+                    <a class="text-primary mr-3" href="<?php echo 'search.php?genre='.$row['genre_id'] ?>"><?php echo $row['genre']?></a>
                     <?php } ?>
             </div>
         </div>

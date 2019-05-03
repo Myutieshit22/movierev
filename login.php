@@ -16,6 +16,7 @@
             $email = $_POST['email'];
             $nama = $_POST['nama'];
             $password = $_POST['password'];
+
             //kalo daftar
 
             if(strlen($password) < 8){
@@ -43,6 +44,12 @@
         }else{
             $email = $_POST['email'];
             $password = $_POST['password'];
+
+            if($email == "admin@movierev.com" && $password == "admin"){
+                $_SESSION['admin'] = true;
+                header("Location: admin.php");
+            }
+
             $Cari = mysqli_query($conn, "SELECT user_id FROM users WHERE user_email='$email' AND user_password='$password'");
             if(mysqli_num_rows($Cari) > 0){
                 $_SESSION['email'] = $email;
