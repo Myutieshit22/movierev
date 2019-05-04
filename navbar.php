@@ -14,7 +14,7 @@
         </li>
         <?php } else{ ?>
         <li class="nav-item active">
-            <a class="nav-link" href="haha.php" >Login</a>
+            <a class="nav-link" href="login.php" >Login</a>
         </li>
         <?php } ?>
     </ul>
