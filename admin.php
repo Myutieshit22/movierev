@@ -1,10 +1,8 @@
-
 <?php 
     include_once 'functions/functions.php';
     if(!isset($_SESSION['admin'])){
         header("Location: index.php");
     }
-
     if(isset($_POST['title'])){
         $title = $_POST['title'];
         $desc = $_POST['desc'];
@@ -13,7 +11,6 @@
         $currentDir = getcwd();
         $uploadDirectory = "/images/";
         $path = "images/";
-
         if(isset($_FILES['image'])){
             $fileName = $_FILES['image']['name'];
             $fileTmpName  = $_FILES['image']['tmp_name'];
@@ -31,7 +28,7 @@
                     }
                     $qq = mysqli_query($conn, "INSERT INTO movies (movie_title,movie_desc,movie_imagepath,movie_year,genre_fk) VALUES ('$title','$desc','$up','$year','$genre')");
                     if($qq){
-                        echo 'berhasil';
+                        echo 'SUCCESSFULL';
                     }
         }else{
             
@@ -39,20 +36,19 @@
         
         echo $up;
     }
-
 ?>
 
 <!DOCTYPE html>
 <html>
 
-<?php include_once 'kepala.php'; ?>
+<?php include_once 'head.php'; ?>
 
 <body>
     <?php include_once 'navbar.php'; ?>
     <div class="container mt-2"> 
         <div class="row mt-3">
             <div class="col-sm">
-            <h1>Tambahkan Film</h1>
+            <h1>Add Movie</h1>
             <form method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="login">
                     <div class="form-group">
@@ -81,7 +77,7 @@
                         ?>
                     </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Masuk</button>
+                    <button type="submit" class="btn btn-primary">ENTER</button>
                 </form>
             </div>
         </div>

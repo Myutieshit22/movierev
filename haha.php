@@ -6,11 +6,11 @@
 <body class="h-100">
 <?php 
     include_once 'functions/functions.php';
-    
+
     if(isset($_SESSION['nama'])){
         header("Location: index.php");
     }
-    
+
     if(isset($_POST['action'])){
         if($_POST['action'] == 'Register' && isset($_POST['email']) && isset($_POST['nama']) && isset($_POST['password'])){
             $email = $_POST['email'];
@@ -19,27 +19,29 @@
             //kalo daftar
             if(strlen($password) < 8){
                 //kalo password kurang dari 8 huruf
-                throwError('Password Must Be More Than 8 Letter!');
+                throwError('Password must be more than 8 letter!');
             }else{
                 $CariEmailSama = mysqli_query($conn, "SELECT user_id FROM users WHERE user_email='$email'");
                 if(mysqli_num_rows($CariEmailSama) == 0){
                     //Semua sudah lewat, tinggal masukin db
-                    $MasukinDb = mysqli_query($conn, "INSERT INTO users (user_username, user_email, user_password) VALUES ('$name','$email','$password')");
+                    $MasukinDb = mysqli_query($conn, "INSERT INTO users (user_username, user_email, user_password) VALUES ('$nama','$email','$password')");
                     if($MasukinDb){
                         $_SESSION['email'] = $email;
                         $_SESSION['name'] = $name;
                         header("Location: index.php");
                     }else{
-                        throwError("There's Something Wrong!");
+                        throwError("There's something wrong!");
                     }
                 }else{
-                    throwError('Email Has Been Registered!');
+                    throwError('Email has been registered!');
                 }
             }
-        
         }else{
             $email = $_POST['email'];
             $password = $_POST['password'];
+             if($email == "Admin@Movierev.com" && $password == "admin"){
+                $_SESSION['admin'] = true;
+                header("Location: admin.php");
             $Cari = mysqli_query($conn, "SELECT user_id FROM users WHERE user_email='$email' AND user_password='$password'");
             if(mysqli_num_rows($Cari) > 0){
                 $_SESSION['email'] = $email;
@@ -49,10 +51,11 @@
                 }
                 header("Location: index.php");
             }else{
-                throwError("Email/Incorrect");
+                throwError("Email/Password Incorrect");
             }
         }
     }
+
 ?>
     <?php include_once 'navbar.php'; ?>
     <div class="container-fluid">
@@ -75,7 +78,7 @@
             <div class="col-sm mr-3 ml-3 mt-4">
                 <h1>Register</h1>
                 <form method="POST">
-                    <input type="hidden" name="action" value="Register">
+                    <input type="hidden" name="action" value="register">
                     <div class="form-group">
                         <label name="name">Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Username">

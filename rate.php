@@ -7,7 +7,7 @@
     
     if(isset($_POST['comment'])){
         if(!isset($_SESSION['email'])){
-            echo '<script>alert("Kamu harus masuk terlebih dahulu untuk memberikan komentar"); window.location.href="login.php"</script>';
+            echo '<script>alert("You must log in first to be able to comment"); window.location.href="login.php"</script>';
         }else{
             $comment = $_POST['comment'];
             $email = $_SESSION['email'];
@@ -18,7 +18,7 @@
 
             $ins = mysqli_query($conn, "INSERT INTO comments (movie_fk, user_fk, comment) VALUES ('$movieid','$userid','$comment')");
             if(!$ins){
-                echo 'error aaaaa';
+                echo 'Failed';
             }
         }
     }
@@ -56,7 +56,7 @@
 <!DOCTYPE html>
 <html>
 
-<?php include_once 'kepala.php'; ?>
+<?php include_once 'head.php'; ?>
 
 <body>
     <?php include_once 'navbar.php'; ?>
@@ -76,19 +76,19 @@
         <div class="row mr-1 ml-1 mt-3">
             <div class="col-sm-4">
                 <div class="container pl-0">
-                    <h3 class="montserrat">Berikan rating</h3>
+                    <h3 class="montserrat">Give a Rate</h3>
                     <form method="POST">
                     <div class="rate">
                         <input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="Sangat Bagus">5 stars</label>
+                        <label for="star5" title="Very Good">5 stars</label>
                         <input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="Bagus">4 stars</label>
+                        <label for="star4" title="Good">4 stars</label>
                         <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="Biasa Saja">3 stars</label>
+                        <label for="star3" title="Not Bad/Standard"Not Bad/Standard>3 stars</label>
                         <input type="radio" id="star2" name="rate" value="2">
-                        <label for="star2" title="Buruk">2 stars</label>
+                        <label for="star2" title="Bad">2 stars</label>
                         <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="Sangat Buruk">1 star</label>
+                        <label for="star1" title="Very Bad">1 star</label>
                     </div>
                     <input type="submit" class="btn btn-primary" />
                     </form>

@@ -7,7 +7,7 @@
     
     if(isset($_POST['comment'])){
         if(!isset($_SESSION['email'])){
-            echo '<script>alert("Kamu harus masuk terlebih dahulu untuk memberikan komentar"); window.location.href="login.php"</script>';
+            echo '<script>alert("You mus to login first to be able for giving a comment"); window.location.href="login.php"</script>';
         }else{
             $comment = $_POST['comment'];
             $email = $_SESSION['email'];
@@ -18,7 +18,7 @@
 
             $ins = mysqli_query($conn, "INSERT INTO comments (movie_fk, user_fk, comment) VALUES ('$movieid','$userid','$comment')");
             if(!$ins){
-                echo 'error aaaaa';
+                echo 'Failed';
             }
         }
     }
@@ -44,7 +44,7 @@
 <!DOCTYPE html>
 <html>
 
-<?php include_once 'kepala.php'; ?>
+<?php include_once 'head.php'; ?>
 
 <body>
     <?php include_once 'navbar.php'; ?>
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="container pl-0">
-                    <p><?php echo $movie['movie_desc']; ?></p>
+                    <p style="text-align: justify;"><?php echo $movie['movie_desc']; ?></p>
                 </div>
                 <div class="container mt-3 pl-0">
                     <p><b>Genre : </b> <?php echo $movie['genre']; ?></p>
@@ -69,7 +69,7 @@
             <div class="col-sm-3">
             <div class="container">
                 <img class="secontainer shadow p-1 mb-1 bg-white rounded" src="<?php echo $movie['movie_imagepath'] ?>">
-                <a href="rate.php?id=<?php echo $_GET['id']; ?>" class="btn btn-block btn-primary">Berikan Penilaian</a>
+                <a href="rate.php?id=<?php echo $_GET['id']; ?>" class="btn btn-block btn-primary">Give a Rating</a>
                 </div>
             </div>
         </div>
@@ -78,21 +78,21 @@
             <div class="col-sm">
                 <div class="container pl-0">
                     <?php $comments = mysqli_query($conn, "SELECT * FROM comments JOIN users ON users.user_id = comments.user_fk WHERE comments.movie_fk=$id ORDER BY comment_date DESC"); ?>
-                    <h3 class="montserrat">Komentar <span
+                    <h3 class="montserrat">Comment <span
                             class="badge badge-secondary"><?php echo mysqli_num_rows($comments); ?></span></h3>
 
                     <div class="container">
 
                         <div class="row">
                             <div class="col-sm-1">
-                                <img src="images/noone.png" width="40px" height="40px">
+                                <img src="Images/people.png" width="40px" height="40px">
                             </div>
                             <div class="col-sm-7 pl-0">
                                 <form class="form-group" method="POST">
-                                    <label for="comment">Tulis komentar mu disini</label>
+                                    <label for="comment">Write You Comment Here</label>
                                     <textarea class="form-control" rows="1" id="comment" name="comment"></textarea>
                                     <button type="submit" class="btn btn-primary btn-sm mt-2" style="float:right;">Post
-                                        komentar</button>
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                     while($comment = mysqli_fetch_assoc($comments)){
                         echo '<div class="row">';
                         echo '<div class="col-sm-1">';
-                        echo '<img src="images/noone.png" width="40px" height="40px">';
+                        echo '<img src="Images/people.png" width="40px" height="40px">';
                         echo '</div>';
                         echo '<div class="col-sm-7 pl-0">';
                         echo '<p class="mb-0"><b>'.$comment['user_username'].'</b></p>';
@@ -111,7 +111,7 @@
                         echo '</div>';
                     }
 
-                    if(mysqli_num_rows($comments) == 0){echo 'Tidak ada komentar';}
+                    if(mysqli_num_rows($comments) == 0){echo 'No Comment Yet';}
                     ?>
                     </div>
                 </div>

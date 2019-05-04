@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 
-<?php include_once 'kepala.php'; ?>
+<?php include_once 'head.php'; ?>
 
 <body>
     <?php include_once 'navbar.php'; ?>

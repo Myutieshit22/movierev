@@ -68,8 +68,11 @@ CREATE TABLE `genre` (
 --
 
 INSERT INTO `genre` (`genre_id`, `genre`) VALUES
-(1, 'Action'),
-(2, 'Thriller');
+(1, 'Horror'),
+(2, 'Action'),
+(3, 'Thriller'),
+(4, 'Romance'),
+(5, 'Sci-Fi'),
 
 -- --------------------------------------------------------
 
